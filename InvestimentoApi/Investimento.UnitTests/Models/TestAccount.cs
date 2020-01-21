@@ -24,7 +24,33 @@ namespace Investimento.UnitTests.Models
             var account = new Account(Guid.NewGuid().ToString(), 200M, null, null);
             var depositValue = -100M;
             Action act = () => account.Deposit(depositValue);
-            act.Should().Throw<NegativeDepositException>();
+            act.Should().Throw<NegativeTransactionException>();
+        }
+
+        [Theory]
+        [MemberData(nameof(DrawOuts))]
+        public void DrawOut(decimal value, Account account, decimal expected)
+        {
+            account.DrawOut(value);
+            account.Balance.Should().Be(expected);
+        }
+
+        [Fact]
+        public void DrawOutNegativeValue()
+        {
+            var account = new Account(Guid.NewGuid().ToString(), 200M, null, null);
+            var depositValue = -100M;
+            Action act = () => account.DrawOut(depositValue);
+            act.Should().Throw<NegativeTransactionException>();
+        }
+
+        [Fact]
+        public void InsufficientFunds()
+        {
+            var account = new Account(Guid.NewGuid().ToString(), 200M, null, null);
+            var depositValue = 1000M;
+            Action act = () => account.DrawOut(depositValue);
+            act.Should().Throw<InsufficientFundsExcetion>();
         }
 
         public static List<object[]> Deposits => new List<object[]>
@@ -39,6 +65,22 @@ namespace Investimento.UnitTests.Models
             {
                 40000M,
                 new Account(),
+                40000M
+            }
+        };
+
+        public static List<object[]> DrawOuts => new List<object[]>
+        {
+            new object[]
+            {
+                100.40M,
+                new Account(Guid.NewGuid().ToString(), 1000, string.Empty , null),
+                899.60M
+            },
+            new object[]
+            {
+                40000M,
+                new Account(Guid.NewGuid().ToString(), 80000M, string.Empty, null),
                 40000M
             }
         };

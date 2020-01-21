@@ -29,8 +29,18 @@ namespace InvestimentoApi.Models
         public decimal Deposit(decimal value)
         {
             if (value < 0)
-                throw new NegativeDepositException();
+                throw new NegativeTransactionException();
             return Balance += value;
+        }
+
+        public decimal DrawOut(decimal value)
+        {
+            if (value < 0)
+                throw new NegativeTransactionException();
+
+            if (Balance < value)
+                throw new InsufficientFundsExcetion();
+            return Balance -= value;
         }
     }
 }

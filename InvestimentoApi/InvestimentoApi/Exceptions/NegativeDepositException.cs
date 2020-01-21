@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace InvestimentoApi.Exceptions
 {
     [Serializable]
-    public class NegativeDepositException : Exception
+    public class NegativeTransactionException : Exception
     {
-        public NegativeDepositException(): base(Constantes.Exceptions.NEGATIVE_DEPOSIT_EXCEPTION) { }
+        public NegativeTransactionException(): base(Constantes.Exceptions.NEGATIVE_TRANSACTION) { }
 
-        public NegativeDepositException(string mensagem) : base(mensagem) { }
+        public NegativeTransactionException(string mensagem) : base(mensagem) { }
 
-        public NegativeDepositException(string mensagem, Exception inner) : base(mensagem, inner) { }
+        public NegativeTransactionException(string mensagem, Exception inner) : base(mensagem, inner) { }
 
-        protected NegativeDepositException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected NegativeTransactionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

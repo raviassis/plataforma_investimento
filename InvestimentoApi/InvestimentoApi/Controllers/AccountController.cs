@@ -1,4 +1,5 @@
 ﻿using InvestimentoApi.Context;
+using InvestimentoApi.Controllers.Requests;
 using InvestimentoApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,7 @@ namespace InvestimentoApi.Controllers
 
         [HttpPost("deposit")]
         [Authorize]
-        public ActionResult Deposit(string id, decimal value)
+        public ActionResult Deposit([FromBody] Transaction request)
         {
             if(User.HasClaim(c => c.Type == JwtClains.ID))
             {
@@ -43,7 +44,7 @@ namespace InvestimentoApi.Controllers
 
                 try
                 {
-                    var result = _accountService.Deposit(userId, id, value);
+                    var result = _accountService.Deposit(userId, request.Id, request.Value);
                     return Ok(result);
                 }
                 catch (Exception e)
@@ -52,6 +53,30 @@ namespace InvestimentoApi.Controllers
                     return BadRequest(ModelState);
                 }
                 
+            }
+
+            return NoContent();
+        }
+
+        [HttpPost("drawout")]
+        [Authorize]
+        public ActionResult DrawOut([FromBody] Transaction request)
+        {
+            if (User.HasClaim(c => c.Type == JwtClains.ID))
+            {
+                var userId = User.FindFirst(JwtClains.ID).Value;
+
+                try
+                {
+                    var result = _accountService.DrawOut(userId, request.Id, request.Value);
+                    return Ok(result);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError(nameof(e.Message), e.Message);
+                    return BadRequest(ModelState);
+                }
+
             }
 
             return NoContent();

@@ -12,7 +12,7 @@
                 <mat-form-field>
                     <input matInput type="number" placeholder="Deposit Value" [(ngModel)]='depositValue'>
                 </mat-form-field>
-                <button mat-raised-button color="primary">Confirm Deposit</button>
+                <button mat-raised-button color="primary" (click)="deposit()">Confirm Deposit</button>
             </div>
         </section>
         <section>

@@ -15,4 +15,12 @@ export class AccoutComponent implements OnInit {
   ngOnInit() {
   }
 
+  getAccount() {
+    
+  }
+
+  deposit() {
+
+  }
+
 }

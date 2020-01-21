@@ -15,7 +15,8 @@ namespace InvestimentoApi.Shared
 
         public static class Exceptions
         {
-            public const string NEGATIVE_DEPOSIT_EXCEPTION = "Cannot deposit negative amounts.";
+            public const string NEGATIVE_TRANSACTION = "Negative transations prohibited.";
+            public const string INSUFFICIENT_FUNDS = "Insufficient funds.";
         }
     }
 }

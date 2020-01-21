@@ -51,7 +51,6 @@ export class AuthService {
                       );
   }
   public carregarDadosToken() {
-    debugger;
     const token = sessionStorage.getItem(constantes.storageKeys.TOKEN);
     if (token) {
       this.user = jwt_decode(token) as UserToken;
