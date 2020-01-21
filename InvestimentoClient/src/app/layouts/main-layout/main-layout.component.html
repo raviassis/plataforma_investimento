@@ -1,0 +1,16 @@
+<header class="nav">
+    <div class="nav-left">
+        <a routerLink="/account" mat-button color="primary">Account</a>
+        <a routerLink="/shares" mat-button color="primary">Shares</a>
+    </div>
+    
+    <div class="nav-right">
+        <span>Wellcome {{authService.user.email}}</span>
+        <button mat-button color="primary" (click)="logout()">Logout</button>
+    </div>
+    
+</header>
+<main>
+    <router-outlet></router-outlet>
+</main>
+

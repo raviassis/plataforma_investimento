@@ -1,0 +1,28 @@
+<div     class="container">
+    <section>
+        <h1>Account</h1>
+        <p>
+            Account Balance: <span>$ {{balance}}</span>
+        </p>
+    </section>
+    <div>
+        <section>
+            <h2>Deposit</h2>
+            <div>
+                <mat-form-field>
+                    <input matInput type="number" placeholder="Deposit Value" [(ngModel)]='depositValue'>
+                </mat-form-field>
+                <button mat-raised-button color="primary">Confirm Deposit</button>
+            </div>
+        </section>
+        <section>
+            <h2>Draw out</h2>
+            <div>
+                <mat-form-field>
+                    <input matInput type="number" placeholder="Draw Value" [(ngModel)]='drawValue'>
+                </mat-form-field>
+                <button mat-raised-button color="primary">Confirm Draw out</button>
+            </div>
+        </section>
+    </div>
+</div>

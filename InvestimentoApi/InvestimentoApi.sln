@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvestimentoApi", "InvestimentoApi\InvestimentoApi.csproj", "{2794313A-43CC-4F2D-B077-E94A4CD1AE08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Investimento.UnitTests", "Investimento.UnitTests\Investimento.UnitTests.csproj", "{80BF7944-03D4-419A-A9FC-FC3FC49E5129}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2794313A-43CC-4F2D-B077-E94A4CD1AE08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2794313A-43CC-4F2D-B077-E94A4CD1AE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2794313A-43CC-4F2D-B077-E94A4CD1AE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2794313A-43CC-4F2D-B077-E94A4CD1AE08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80BF7944-03D4-419A-A9FC-FC3FC49E5129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BF7944-03D4-419A-A9FC-FC3FC49E5129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BF7944-03D4-419A-A9FC-FC3FC49E5129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BF7944-03D4-419A-A9FC-FC3FC49E5129}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E998BF8-C086-4F39-96F9-2CAC294F3DC1}
+	EndGlobalSection
+EndGlobal
