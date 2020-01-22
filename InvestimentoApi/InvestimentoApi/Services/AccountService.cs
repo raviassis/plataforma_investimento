@@ -1,6 +1,7 @@
 ﻿using InvestimentoApi.Context;
 using InvestimentoApi.Models;
 using InvestimentoApi.Services.Interfaces;
+using InvestimentoApi.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,19 @@ namespace InvestimentoApi.Services
     public class AccountService : IAccountService
     {
         private readonly ApplicationDbContext _context;
-        public AccountService(ApplicationDbContext context)
+        private readonly IQueryableExtensionWrapper _queryableWrapper;
+        public AccountService(ApplicationDbContext context, IQueryableExtensionWrapper queryableWrapper)
         {
             _context = context;
+            _queryableWrapper = queryableWrapper;
         }
 
         private Account GetAccount(string userId, string id = null)
         {
             if(string.IsNullOrWhiteSpace(id))
-                return _context.Accounts.FirstOrDefault(a => a.UserId == userId);
+                return _queryableWrapper.FirstOrDefault(_context.Accounts, a => a.UserId == userId);
             else
-                return _context.Accounts.FirstOrDefault(a => a.Id == id && a.UserId == userId);
+                return _queryableWrapper.FirstOrDefault(_context.Accounts, a => a.Id == id && a.UserId == userId);
         }
 
         private Account Save(Account account)
@@ -34,15 +37,26 @@ namespace InvestimentoApi.Services
         public Account Deposit(string userId, string id, decimal value)
         {
             var account = GetAccount(userId, id);
-            account.Deposit(value);
-            return Save(account);
+            if(account != null)
+            {
+                account.Deposit(value);
+                return Save(account);
+            }
+
+            return account;
         }        
 
         public Account DrawOut(string userId, string id, decimal value)
         {
             var account = GetAccount(userId, id);
-            account.DrawOut(value);
-            return Save(account);
+            if (account != null)
+            {
+                account.DrawOut(value);
+                return Save(account);
+            }
+
+            return account;
+
         }
 
         public Account GetAccount(string userId)

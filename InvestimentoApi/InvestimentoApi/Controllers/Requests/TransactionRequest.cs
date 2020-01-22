@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace InvestimentoApi.Controllers.Requests
 {
-    public class Transaction
+    public class TransactionRequest
     {
         public string Id { get; set; }
         public decimal Value { get; set; }

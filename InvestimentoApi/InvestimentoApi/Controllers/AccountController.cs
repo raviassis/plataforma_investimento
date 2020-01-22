@@ -36,7 +36,7 @@ namespace InvestimentoApi.Controllers
 
         [HttpPost("deposit")]
         [Authorize]
-        public ActionResult Deposit([FromBody] Transaction request)
+        public ActionResult Deposit([FromBody] TransactionRequest request)
         {
             if(User.HasClaim(c => c.Type == JwtClains.ID))
             {
@@ -60,7 +60,7 @@ namespace InvestimentoApi.Controllers
 
         [HttpPost("drawout")]
         [Authorize]
-        public ActionResult DrawOut([FromBody] Transaction request)
+        public ActionResult DrawOut([FromBody] TransactionRequest request)
         {
             if (User.HasClaim(c => c.Type == JwtClains.ID))
             {

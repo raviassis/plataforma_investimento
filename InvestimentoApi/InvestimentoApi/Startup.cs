@@ -7,6 +7,7 @@ using InvestimentoApi.Context;
 using InvestimentoApi.Models;
 using InvestimentoApi.Services;
 using InvestimentoApi.Services.Interfaces;
+using InvestimentoApi.Shared;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,6 +47,7 @@ namespace InvestimentoApi
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddSingleton<IQueryableExtensionWrapper, QueryableExtensionWrapper>();
 
             ConfigureJwt(services);
         }
