@@ -4,6 +4,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Websocket.Client;
+using Newtonsoft.Json;
+using InvestimentoApi.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Investimento.WebJob
 {
@@ -25,15 +29,26 @@ namespace Investimento.WebJob
                 client.ReconnectionHappened.Subscribe(info =>
                     Console.WriteLine($"Reconnection happened, type: {info.Type}"));
 
-                client.MessageReceived.Subscribe(msg => Console.WriteLine($"Message received: {msg}"));
-                client.Start();
+                client.MessageReceived.Subscribe(msg => { 
+                    Console.WriteLine($"Message received: {msg}");
+                    SaveMessage(msg);
+                });
 
-                Task.Run(() => client.Send("{ message }"));
+                await client.Start();
 
                 exitEvent.WaitOne();
             }
+        }
 
-
+        private static void SaveMessage(ResponseMessage msg)
+        {
+            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(msg.Text);
+            Quote quote = new Quote()
+            {
+                Name = values.ElementAt(0).Key,
+                Value = decimal.Parse(values.ElementAt(0).Value.ToString()),
+            };
+            
         }
     }
 }

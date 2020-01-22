@@ -8,6 +8,7 @@ using InvestimentoApi.Models;
 using InvestimentoApi.Services;
 using InvestimentoApi.Services.Interfaces;
 using InvestimentoApi.Shared;
+using InvestimentoApi.WebJobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,9 +48,18 @@ namespace InvestimentoApi
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IQuoteService, QuoteService>();
             services.AddSingleton<IQueryableExtensionWrapper, QueryableExtensionWrapper>();
 
             ConfigureJwt(services);
+            StartWebJobs(services);
+        }
+
+        private void StartWebJobs(IServiceCollection services)
+        {            
+            var quouteService = services.BuildServiceProvider().GetService<IQuoteService>();
+            // warning garbage collector
+            var quoteJob = new QuotesWebJob(Configuration, quouteService);
         }
 
         private void ConfigureJwt(IServiceCollection services)
