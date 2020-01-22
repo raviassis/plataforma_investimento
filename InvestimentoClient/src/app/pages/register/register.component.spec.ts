@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -13,6 +14,7 @@ describe('RegisterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RegisterComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: NgxSpinnerService, useClass: NgxSpinnerServiceMock},
         { provide: Router, useClass: RouterMock},

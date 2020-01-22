@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
-import { MatDialog } from '@angular/material/dialog';
-import { config } from 'rxjs';
 
 @Component({
   selector: 'app-accout',
@@ -13,9 +11,7 @@ export class AccoutComponent implements OnInit {
   depositValue: number;
   drawValue: number;
 
-  constructor(
-    private accountService: AccountService,
-    public dialog: MatDialog) { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit() {
     this.getAccount();
