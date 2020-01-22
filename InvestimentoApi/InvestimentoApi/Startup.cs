@@ -54,18 +54,6 @@ namespace InvestimentoApi
 
         private void ConfigureJwt(IServiceCollection services)
         {
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //        .AddJwtBearer(options =>
-            //                        options.TokenValidationParameters = new TokenValidationParameters
-            //                        {
-            //                            ValidateIssuer = false,
-            //                            ValidateAudience = false,
-            //                            ValidateLifetime = true,
-            //                            ValidateIssuerSigningKey = true,
-            //                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:key"])),
-            //                            ClockSkew = TimeSpan.Zero
-            //                        }
-            //        );
 
             var key = Encoding.UTF8.GetBytes(Configuration["jwt:key"]);
             services.AddAuthentication(x =>
