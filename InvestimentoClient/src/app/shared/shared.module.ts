@@ -13,6 +13,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import { HttpInterceptorModule } from './interceptors/http-interceptor.module';
 
 
 
@@ -33,6 +35,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatDialogModule,
+    HttpInterceptorModule
   ],
   exports: [
     FormsModule,
@@ -48,6 +52,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatDialogModule,
+    HttpInterceptorModule
   ],
 })
 export class SharedModule { }

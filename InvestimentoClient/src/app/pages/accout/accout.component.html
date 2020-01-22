@@ -1,28 +1,24 @@
-<div     class="container">
+<div class="container">
     <section>
         <h1>Account</h1>
         <p>
-            Account Balance: <span>$ {{balance}}</span>
+            Account Balance: <span>$ {{account?.balance || 0.00}}</span>
         </p>
     </section>
-    <div>
-        <section>
+    <div class="actions">
+        <section class="card">
             <h2>Deposit</h2>
-            <div>
-                <mat-form-field>
-                    <input matInput type="number" placeholder="Deposit Value" [(ngModel)]='depositValue'>
-                </mat-form-field>
-                <button mat-raised-button color="primary" (click)="deposit()">Confirm Deposit</button>
-            </div>
+            <mat-form-field class="card-fields">
+                <input matInput type="number" placeholder="Deposit Value" [(ngModel)]='depositValue'>
+            </mat-form-field>
+            <button class="card-fields" mat-raised-button color="primary" (click)="deposit()">Confirm Deposit</button>
         </section>
-        <section>
+        <section class="card">
             <h2>Draw out</h2>
-            <div>
-                <mat-form-field>
-                    <input matInput type="number" placeholder="Draw Value" [(ngModel)]='drawValue'>
-                </mat-form-field>
-                <button mat-raised-button color="primary">Confirm Draw out</button>
-            </div>
+            <mat-form-field class="card-fields">
+                <input matInput type="number" placeholder="Draw Value" [(ngModel)]='drawValue'>
+            </mat-form-field>
+            <button class="card-fields" mat-raised-button color="primary" (click)="drawOut()">Confirm Draw out</button>
         </section>
     </div>
 </div>
