@@ -17,5 +17,6 @@ namespace InvestimentoApi.Context
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Quote> Quotes { get; set; }
     }
 }
