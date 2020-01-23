@@ -22,5 +22,5 @@ Seguido esses passos o projeto estará pronto para uso.
 
 ## Executar Testes Unitários
 - Na raiz do projeto, navegue para o projeto de testes ` cd .\InvestimentoApi\Investimento.UnitTests\`
-- Execute `dotnet test --project='.\InvestimentoApi\Investimento.UnitTests\'`
+- Execute `dotnet test`
 - Navegue para o projeto de testes de frontend `cd .InvestimentoApi\Investimento` e execute `ng test`
