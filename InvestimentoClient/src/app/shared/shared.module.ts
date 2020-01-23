@@ -14,12 +14,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpInterceptorModule } from './interceptors/http-interceptor.module';
+import { TransationDialogComponent } from './components/transation-dialog/transation-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TransationDialogComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -36,6 +40,8 @@ import { HttpInterceptorModule } from './interceptors/http-interceptor.module';
     MatFormFieldModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
     HttpInterceptorModule
   ],
   exports: [
@@ -53,7 +59,15 @@ import { HttpInterceptorModule } from './interceptors/http-interceptor.module';
     MatFormFieldModule,
     MatSnackBarModule,
     MatDialogModule,
-    HttpInterceptorModule
+    MatTableModule,
+    MatPaginatorModule,
+    HttpInterceptorModule,
+    TransationDialogComponent,
+    ConfirmDialogComponent
+  ],
+  entryComponents: [
+    TransationDialogComponent,
+    ConfirmDialogComponent,
   ],
 })
 export class SharedModule { }

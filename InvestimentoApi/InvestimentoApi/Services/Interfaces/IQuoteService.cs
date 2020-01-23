@@ -9,5 +9,7 @@ namespace InvestimentoApi.Services.Interfaces
     public interface IQuoteService
     {
         Task<Quote> UpInsert(Quote quote);
+
+        IEnumerable<Quote> GetQuotes();
     }
 }

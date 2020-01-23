@@ -19,6 +19,11 @@ namespace InvestimentoApi.Services
             _queryableWrapper = queryableWrapper;
         }
 
+        public IEnumerable<Quote> GetQuotes()
+        {
+            return _context.Quotes.AsEnumerable();
+        }
+
         public Task<Quote> UpInsert(Quote newQuote)
         {
             Quote quote = _queryableWrapper.FirstOrDefault(_context.Quotes, q => q.Name == newQuote.Name);

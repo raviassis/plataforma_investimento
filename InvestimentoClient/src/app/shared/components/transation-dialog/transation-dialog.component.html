@@ -1,0 +1,17 @@
+<p>
+    Quote: <strong>{{data.name}}</strong> 
+</p>
+<p>
+    Value: $ {{data.value}}
+</p>
+<div>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Quantity" [(ngModel)]='data.number'>
+    </mat-form-field>
+</div>
+<p>
+    Total: {{ (data.value * data.number) || 0.00 }}
+</p>
+<div>
+    <button class="button-block" mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+</div>
