@@ -58,14 +58,6 @@ namespace InvestimentoApi
             services.AddSingleton<IQueryableExtensionWrapper, QueryableExtensionWrapper>();
 
             ConfigureJwt(services);
-            //StartWebJobs(services);
-        }
-
-        private void StartWebJobs(IServiceCollection services)
-        {            
-            var quouteService = services.BuildServiceProvider().GetService<IQuoteService>();
-            // warning garbage collector
-            var quoteJob = new QuotesWebJob(Configuration, quouteService);
         }
 
         private void ConfigureJwt(IServiceCollection services)

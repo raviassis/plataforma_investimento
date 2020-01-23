@@ -14,4 +14,10 @@
     <ProjectReference Include="..\InvestimentoApi\InvestimentoApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -8,6 +8,15 @@ using Newtonsoft.Json;
 using InvestimentoApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using InvestimentoApi.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using InvestimentoApi.Services.Interfaces;
+using InvestimentoApi.Services;
+using InvestimentoApi.WebJobs;
+using InvestimentoApi.Shared;
 
 namespace Investimento.WebJob
 {
@@ -15,40 +24,36 @@ namespace Investimento.WebJob
     {
         public static void Main(string[] args)
         {
-            Start().Wait();
+            Console.WriteLine("Builder Configuration");
+            var config = new ConfigurationBuilder()
+                                .SetBasePath(Path.Combine(AppContext.BaseDirectory))
+                                .AddJsonFile("appsettings.json")
+                                .Build();
+
+            Console.WriteLine("Builder DI");
+            var serviceProvider = new ServiceCollection()
+                                        .AddDbContext<ApplicationDbContext>(options =>
+                                            options.UseSqlServer(config.GetConnectionString("DefaultConnection"))
+                                        )
+                                        .AddSingleton<IConfiguration>(config)
+                                        .AddScoped<IQuoteService, QuoteService>()
+                                        .AddSingleton<IQuoteWebJob, QuoteWebJob>()
+                                        .AddSingleton<IQueryableExtensionWrapper, QueryableExtensionWrapper>()
+                                        .BuildServiceProvider();
+
+
+            Console.WriteLine("Get WebJob");
+            var job = serviceProvider.GetService<IQuoteWebJob>();
+
+            Console.WriteLine("Start");
+            Console.Write("\n\n\n");
+            Console.WriteLine("Press any key to exit...");
+            Console.CursorTop -= 3; 
+            Task.Run(() => job.Start());
+
+            Console.ReadKey();
+            Console.CursorTop += 4;
         }
 
-        private static async Task Start()
-        {
-            var exitEvent = new ManualResetEvent(false);
-            var url = new Uri("ws://192.168.99.100:8080/quotes");
-
-            using (var client = new WebsocketClient(url))
-            {
-                client.ReconnectTimeout = TimeSpan.FromSeconds(30);
-                client.ReconnectionHappened.Subscribe(info =>
-                    Console.WriteLine($"Reconnection happened, type: {info.Type}"));
-
-                client.MessageReceived.Subscribe(msg => { 
-                    Console.WriteLine($"Message received: {msg}");
-                    SaveMessage(msg);
-                });
-
-                await client.Start();
-
-                exitEvent.WaitOne();
-            }
-        }
-
-        private static void SaveMessage(ResponseMessage msg)
-        {
-            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(msg.Text);
-            Quote quote = new Quote()
-            {
-                Name = values.ElementAt(0).Key,
-                Value = decimal.Parse(values.ElementAt(0).Value.ToString()),
-            };
-            
-        }
     }
 }
