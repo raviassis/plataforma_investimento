@@ -121,6 +121,29 @@ namespace InvestimentoApi.Migrations
                     b.ToTable("Quotes");
                 });
 
+            modelBuilder.Entity("InvestimentoApi.Models.QuoteUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuoteId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuoteId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("QuoteUsers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -257,6 +280,17 @@ namespace InvestimentoApi.Migrations
                     b.HasOne("InvestimentoApi.Models.ApplicationUser", "User")
                         .WithOne("Account")
                         .HasForeignKey("InvestimentoApi.Models.Account", "UserId");
+                });
+
+            modelBuilder.Entity("InvestimentoApi.Models.QuoteUser", b =>
+                {
+                    b.HasOne("InvestimentoApi.Models.Quote", "Quote")
+                        .WithMany()
+                        .HasForeignKey("QuoteId");
+
+                    b.HasOne("InvestimentoApi.Models.ApplicationUser", "User")
+                        .WithMany("QuotesUser")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

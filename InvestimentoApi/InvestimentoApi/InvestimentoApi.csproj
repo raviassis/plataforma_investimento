@@ -9,11 +9,18 @@
     <Compile Remove="Migrations\20200120212736_First-Migration.Designer.cs" />
     <Compile Remove="Migrations\20200121003804_Initial.cs" />
     <Compile Remove="Migrations\20200121003804_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200121084520_Initial.cs" />
+    <Compile Remove="Migrations\20200121084520_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200122082139_Quotes.cs" />
+    <Compile Remove="Migrations\20200122082139_Quotes.Designer.cs" />
+    <Compile Remove="Migrations\20200123024800_QuoteUser.cs" />
+    <Compile Remove="Migrations\20200123024800_QuoteUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">

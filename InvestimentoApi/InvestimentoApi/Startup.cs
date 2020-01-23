@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 
 namespace InvestimentoApi
 {
@@ -44,7 +45,12 @@ namespace InvestimentoApi
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc()
+                    .AddNewtonsoftJson(options =>
+                    {
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    })
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
@@ -52,7 +58,7 @@ namespace InvestimentoApi
             services.AddSingleton<IQueryableExtensionWrapper, QueryableExtensionWrapper>();
 
             ConfigureJwt(services);
-            StartWebJobs(services);
+            //StartWebJobs(services);
         }
 
         private void StartWebJobs(IServiceCollection services)

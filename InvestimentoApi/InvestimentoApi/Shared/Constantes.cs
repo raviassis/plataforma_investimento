@@ -17,6 +17,8 @@ namespace InvestimentoApi.Shared
         {
             public const string NEGATIVE_TRANSACTION = "Negative transations prohibited.";
             public const string INSUFFICIENT_FUNDS = "Insufficient funds.";
+            public const string LESS_OR_EQUAL_ZERO = "Number less or equal to zero";
+            public const string INSUFFICIENT_QUOTES = "Insufficient quotes.";
         }
     }
 }

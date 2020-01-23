@@ -51,14 +51,9 @@ namespace InvestimentoApi.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                var account = _context.Accounts.FirstOrDefault(a => a.UserId == user.Id);
-                if (account == null)
-                {
-                    account = new Account() {Id = Guid.NewGuid().ToString(), User = user, UserId = user.Id };
-                    _context.Accounts.Add(account);
-                    _context.SaveChanges();
-                }
-                
+                user.Account = new Account() { Id = Guid.NewGuid().ToString(), User = user, UserId = user.Id };
+                _context.Users.Update(user);
+                _context.SaveChanges();
                 var jwt =  _tokenService.GenerateToken(user.Id, user.Email);
                 return new UserViewModel() { Id = user.Id, Email = model.Email, Token = jwt };
             }
@@ -69,7 +64,7 @@ namespace InvestimentoApi.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<UserViewModel>> Login([FromBody] UserInfo userInfo)
+        public async Task<IActionResult> Login([FromBody] UserInfo userInfo)
         {
             var result = await _signInManager.PasswordSignInAsync(userInfo.Email, userInfo.Password,
                  isPersistent: false, lockoutOnFailure: false);
@@ -78,7 +73,7 @@ namespace InvestimentoApi.Controllers
             {
                 var user = _userManager.Users.First(u => u.Email == userInfo.Email);
                 var jwt = _tokenService.GenerateToken(user.Id, user.Email);
-                return new UserViewModel() {Id = user.Id, Email = user.Email, Token = jwt };
+                return Ok(new UserViewModel() {Id = user.Id, Email = user.Email, Token = jwt });
             }
             else
             {

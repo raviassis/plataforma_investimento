@@ -2,6 +2,7 @@
 using InvestimentoApi.Models;
 using InvestimentoApi.Services.Interfaces;
 using InvestimentoApi.Shared;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,40 @@ namespace InvestimentoApi.Services
             _queryableWrapper = queryableWrapper;
         }
 
+        public QuoteUser BuyQuote(string id, int number, string userId)
+        {
+            var user = _context.Users
+                            .Include(u => u.Account)
+                            .Include(u => u.QuotesUser)
+                            .FirstOrDefault(u => u.Id == userId);
+            var quote = _context.Quotes.FirstOrDefault(q => q.Id == id);
+            var quoteUser = user.Buy(quote, number);
+            _context.Update(user);
+            _context.SaveChanges();
+            return quoteUser;
+        }
+
         public IEnumerable<Quote> GetQuotes()
         {
             return _context.Quotes.AsEnumerable();
+        }
+
+        public IEnumerable<QuoteUser> OwnQuotes(string userId)
+        {
+            return _context.QuoteUsers.Include(q => q.Quote).Where(q => q.UserId == userId);
+        }
+
+        public QuoteUser SellQuote(string id, int number, string userId)
+        {
+            var user = _context.Users
+                            .Include(u => u.Account)
+                            .Include(u => u.QuotesUser)
+                            .FirstOrDefault(u => u.Id == userId);
+            var quote = _context.Quotes.FirstOrDefault(q => q.Id == id);
+            var quoteUser = user.Sell(quote, number);
+            _context.Update(user);
+            _context.SaveChanges();
+            return quoteUser;
         }
 
         public Task<Quote> UpInsert(Quote newQuote)
@@ -44,5 +76,7 @@ namespace InvestimentoApi.Services
 
             return Task.FromResult(quote);
         }
+
+
     }
 }
