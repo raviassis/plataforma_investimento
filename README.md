@@ -7,7 +7,8 @@ Desafio de Programação
 - Angular Cli 8.3.+ : execute 'npm install -g @angular/cli' no terminal
 ## Instalação
 Depois de atender os Pré-requisitos:
-- Clone repositório: git clone https://github.com/raviassis/plataforma_investimento.git
+- Clone o repositório: git clone https://github.com/raviassis/plataforma_investimento.git
+- execute no terminal do docker o comando `docker run -p 8080:8080 toroinvestimentos/quotesmock`
 - Execute a api: dotnet run --project='.\InvestimentoApi\InvestimentoApi\'
 - Acesse o caminho plataforma_investimento/InvestimentoClient: cd plataforma_investimento/InvestimentoClient
 - Instale as dependências: npm install
