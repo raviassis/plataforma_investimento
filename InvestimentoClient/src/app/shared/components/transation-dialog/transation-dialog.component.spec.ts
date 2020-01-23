@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransationDialogComponent } from './transation-dialog.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('TransationDialogComponent', () => {
   let component: TransationDialogComponent;
@@ -8,7 +10,12 @@ describe('TransationDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TransationDialogComponent ]
+      declarations: [ TransationDialogComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        {provide: MatDialogRef, useValue: {}},
+        {provide: MAT_DIALOG_DATA, useValue: {}}
+      ],
     })
     .compileComponents();
   }));

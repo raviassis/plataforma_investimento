@@ -5,7 +5,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { of } from 'rxjs';
 import { AccountResponse } from 'src/app/services/models/account.response';
-import { ok } from 'assert';
+import { MatTableModule } from '@angular/material/table';
+import { QuoteService } from 'src/app/services/quote.service';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('AccoutComponent', () => {
   let component: AccoutComponent;
@@ -15,8 +17,11 @@ describe('AccoutComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AccoutComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
+      imports: [MatTableModule],
       providers: [
-        { provide: AccountService, useClass: AccountServiceMock }
+        { provide: AccountService, useClass: AccountServiceMock },
+        { provide: QuoteService, useClass: QuoteServiceMock },
+        { provide: MatDialog, useClass: MatDialogMock }
       ]
     })
     .compileComponents();
@@ -29,6 +34,12 @@ describe('AccoutComponent', () => {
   });
 
   it('should create', () => {
+    const accountService = TestBed.get(AccountService);
+    spyOn(accountService, 'getAccount').and.returnValue(of({}));
+
+    const quoteService = TestBed.get(QuoteService);
+    spyOn(quoteService, 'getOwnQuotes').and.returnValue(of([]));
+
     expect(component).toBeTruthy();
   });
 
@@ -80,4 +91,15 @@ class AccountServiceMock {
   }
 
   drawOut() {  }
+}
+
+class QuoteServiceMock {
+  getOwnQuotes() {
+    return of();
+  }
+  sell(data) {}
+}
+
+class MatDialogMock {
+  open() { }
 }
