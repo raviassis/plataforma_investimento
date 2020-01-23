@@ -21,4 +21,38 @@
             <button class="card-fields" mat-raised-button color="primary" (click)="drawOut()">Confirm Draw out</button>
         </section>
     </div>
+    <section class="tableSection">
+        <h2>My Quotes</h2>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.quote.name}} </td>
+            </ng-container>
+
+            <!-- Value Column -->
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef> Value </th>
+                <td mat-cell *matCellDef="let element"> {{element.quote.value}} </td>
+            </ng-container>
+
+            <!-- Number Column -->
+            <ng-container matColumnDef="number">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+            </ng-container>
+
+            <!-- Act Column -->
+            <ng-container matColumnDef="act">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button color="primary" (click)="openModal(element)">Sell</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </section>
 </div>

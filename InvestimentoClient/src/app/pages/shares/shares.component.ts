@@ -13,7 +13,6 @@ import { constantes } from 'src/app/shared/constantes';
   styleUrls: ['./shares.component.scss']
 })
 export class SharesComponent implements OnInit {
-  quotes;
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'value', 'act'];
   constructor(private quoteService: QuoteService, public dialog: MatDialog) { }
@@ -28,10 +27,8 @@ export class SharesComponent implements OnInit {
     this.quoteService.getQuotes()
       .subscribe(
         (res) => {
-          this.quotes = res;
           this.dataSource = new MatTableDataSource<any>(res);
           this.dataSource.paginator = this.paginator;
-          console.log(res);
         },
         () => {},
         () => {}
